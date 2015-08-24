@@ -6,14 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines":{
-    "node":"0.12.x",
-    "npm":"1.4.x"
+  "engines": {
+    "node": "0.12.x",
+    "npm": "1.4.x"
   },
   "author": "Rene Lopez",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.13.3",
+    "bower": "^1.5.1",
     "express": "^4.13.3",
     "jade": "^1.11.0",
     "mongoose": "^4.1.3",
