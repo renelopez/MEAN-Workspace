@@ -11,6 +11,10 @@
     "node": "0.12.x",
     "npm": "1.4.x"
   },
+  "engines":{
+    "node":"0.12.x",
+    "npm":"1.4.x"
+  },
   "author": "Rene Lopez",
   "license": "ISC",
   "dependencies": {

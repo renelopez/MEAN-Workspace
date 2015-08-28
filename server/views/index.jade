@@ -1,6 +1,21 @@
 extends ../includes/layout
 
 block main-content
+    nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+             a.navbar-brand  Megacable
+          ul.nav.navbar-nav
+           li
+               a(href="#") Home
+           li
+               a(href="#") Field2
+           li
+               a(href="#") Field3
     section.content
         div(ng-view)
     h2= mongoMessage
+
+
+    footer.container.text-center
+        p &copy; 2013 Multivision Corp International Ltd.
