@@ -6,10 +6,6 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
         requireBase: false
     });
     $routeProvider
-        .when('/',{templateUrl:'/partials/main',controller:'mainCtrl as vm'})
+        .when('/',{templateUrl:'/partials/main/main',controller:'mvMainCtrl as vm'})
 });
 
-angular.module('app').controller('mainCtrl',function(){
-  var vm=this;
-  vm.myVar='Hello Angular';
-});
