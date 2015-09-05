@@ -1,17 +1,17 @@
-angular.module('app').controller('mvNavBarLoginCtrl',function($http){
-   var vm=this;
-   vm.signin=signin;
-   vm.user='';
-   vm.password='';
+angular.module('app').controller('mvNavBarLoginCtrl', function ($http, mvAuth, mvIdentity, mvNotifier) {
+    var vm = this;
+    vm.signin = signin;
+    vm.user = '';
+    vm.password = '';
+    vm.identity = mvIdentity;
 
-   function signin(username,password){
-       $http.post('/login',{username:username,password:password}).then(function(response){
-           if(response.data.success){
-               console.log('logged in')
-           }
-           else{
-               console.log('Not logged in');
-           }
-       })
-   }
+    function signin(username, password) {
+        mvAuth.authenticateUser(username, password).then(function (success) {
+            if (success) {
+                mvNotifier.notify('You have succesfully signed in!')
+            } else {
+                mvNotifier.notify('Username/Password combination incorrect')
+            }
+        })
+    }
 });
