@@ -1,6 +1,7 @@
 angular.module('app').factory('mvAuth', function ($http, $q, mvIdentity) {
     return {
-        authenticateUser: authenticateUser
+        authenticateUser: authenticateUser,
+        logOut:logout
     };
 
     function authenticateUser(username, password) {
@@ -15,6 +16,15 @@ angular.module('app').factory('mvAuth', function ($http, $q, mvIdentity) {
             }
         });
 
+        return dfd.promise;
+    }
+
+    function logout(){
+        var dfd=$q.defer;
+        $http.post('/logout',{logout:true}).then(function(){
+            mvIdentity.currentUser=undefined;
+            dfd.resolve()
+        });
         return dfd.promise;
     }
 });

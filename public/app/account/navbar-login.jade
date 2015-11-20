@@ -5,3 +5,10 @@
       .form-group
          input.form-control(placeholder="Password",ng-model="vm.password")
       button.btn.btn-primary(ng-click="vm.signin(vm.username,vm.password)") Sign In
+   ul.nav.navbar.navbar-nav.navbar-right(ng-show='vm.identity.isAuthenticated()')
+      li.dropdown
+         a.dropdown-toggle(href="", data-toggle="dropdown") {{vm.identity.currentUser.firstName + vm.identity.currentUser.lastName }}
+            span.caret
+         ul.dropdown-menu
+            li
+               a(href='', ng-click='vm.logout()') Log Off
