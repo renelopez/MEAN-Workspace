@@ -7,5 +7,6 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     });
     $routeProvider
         .when('/',{templateUrl:'/partials/main/main',controller:'mvMainCtrl as vm'})
+        .when('/admin/users',{templateUrl:'/partials/admin/user-list',controller:'mvUserListCtrl as vm'})
 });
 

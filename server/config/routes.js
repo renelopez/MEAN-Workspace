@@ -19,7 +19,7 @@ module.exports = function (app) {
 
     app.post('/logout',function(req,res){
         req.logout();
-        req.end()
+        res.end()
     });
 
     app.get('*', function (req, res) {

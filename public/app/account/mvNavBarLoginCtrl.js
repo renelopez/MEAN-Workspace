@@ -21,8 +21,8 @@ angular.module('app').controller('mvNavBarLoginCtrl', function ($http,$location,
         mvAuth.logout().then(function(){
            vm.user='';
            vm.password='';
-           mvNotifier.notify('You have succesfully signed out!!!')
-           $location.path('/')
+           mvNotifier.notify('You have succesfully signed out!!!');
+           $location.path('/');
         });
     }
 });
