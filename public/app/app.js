@@ -7,6 +7,24 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     });
     $routeProvider
         .when('/',{templateUrl:'/partials/main/main',controller:'mvMainCtrl as vm'})
-        .when('/admin/users',{templateUrl:'/partials/admin/user-list',controller:'mvUserListCtrl as vm'})
+        .when('/admin/users',{templateUrl:'/partials/admin/user-list',
+            controller:'mvUserListCtrl as vm',
+            resolve:{
+                auth:function($q,mvIdentity,mvNotifier){
+                    if(mvIdentity.currentUser && mvIdentity.currentUser.roles.indexOf('admin') > -1){
+                        return true;
+                    }
+                    else{
+                        return $q.reject('not authorized')
+                    }
+                }
+            }})
 });
 
+angular.module('app').run(function($rootScope,$location){
+    $rootScope.$on('$routeChangeError',function(evt,current,previous,rejection){
+        if(rejection === 'not authorized'){
+            $location.path('/')
+        }
+    })
+});

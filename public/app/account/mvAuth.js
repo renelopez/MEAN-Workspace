@@ -9,6 +9,7 @@ angular.module('app').factory('mvAuth', function ($http, $q, mvIdentity) {
         $http.post('/login', {username: username, password: password}).then(function (response) {
             if (response.data.success) {
                 mvIdentity.currentUser = response.data.user;
+                console.log(mvIdentity.currentUser)
                 dfd.resolve(true);
             }
             else {

@@ -1,5 +1,8 @@
 .navbar-right(ng-controller="mvNavBarLoginCtrl as vm")
    form.navbar-form(ng-hide='vm.identity.isAuthenticated()')
+      ul.nav.navbar-nav
+        li
+         a(href='/signup') Sign up
       .form-group
          input.form-control(placeholder="Email",ng-model="vm.username")
       .form-group
@@ -11,6 +14,6 @@
             span.caret
          ul.dropdown-menu
             li
-               a(href='admin/users') User List
+               a(href='/admin/users') User List
             li
                a(href='', ng-click='vm.logout()') Log Off
