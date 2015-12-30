@@ -1,6 +1,7 @@
-angular.module('app').factory('mvAuth', function ($http, $q, mvIdentity) {
+angular.module('app').factory('mvAuth', function ($http, $q, mvIdentity,mvUser) {
     return {
         authenticateUser: authenticateUser,
+        createUser:createUser,
         logout:logout
     };
 
@@ -17,6 +18,19 @@ angular.module('app').factory('mvAuth', function ($http, $q, mvIdentity) {
             }
         });
 
+        return dfd.promise;
+    }
+
+    function createUser(userData){
+        var newUser=new mvUser(userData);
+        var dfd=$q.defer();
+
+        newUser.$save().then(function(){
+           mvIdentity.currentUser=newUser;
+           dfd.resolve();
+        },function(response){
+            dfd.reject(response.data.reason);
+        });
         return dfd.promise;
     }
 

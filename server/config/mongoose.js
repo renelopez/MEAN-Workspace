@@ -1,5 +1,5 @@
 var mongoose=require('mongoose');
-var crypto=require('crypto');
+var encryption=require('../utilities/encryption');
 
 
 module.exports=function(config){
@@ -22,7 +22,7 @@ module.exports=function(config){
 
     userSchema.methods={
         authenticate:function(passwordToMatch){
-           return hashPasswd(this.salt,passwordToMatch) === this.hashed_pwd
+           return encryption.hashPasswd(this.salt,passwordToMatch) === this.hashed_pwd
         }
     };
 
@@ -33,26 +33,17 @@ module.exports=function(config){
 
             var salt,hash;
 
-            salt=createSalt();
-            hash=hashPasswd(salt,'Joe');
+            salt=encryption.createSalt();
+            hash=encryption.hashPasswd(salt,'Joe');
             User.create({firstName:"Joe",lastName:'Eames',username:'joe',salt:salt,hashed_pwd:hash,roles:["admin"]});
 
-            salt=createSalt();
-            hash=hashPasswd(salt,'John');
+            salt=encryption.createSalt();
+            hash=encryption.hashPasswd(salt,'John');
             User.create({firstName:'John',lastName:'Papa',username:'john',salt:salt,hashed_pwd:hash,roles:[]});
 
-            salt=createSalt();
-            hash=hashPasswd(salt,'Dan');
+            salt=encryption.createSalt();
+            hash=encryption.hashPasswd(salt,'Dan');
             User.create({firstName:"Dan",lastName:'Whalin',username:'dan',salt:salt,hashed_pwd:hash});
         }
     });
-
-    function createSalt(){
-        return crypto.randomBytes(128).toString('base64');
-    }
-
-    function hashPasswd(salt,password){
-        var hmac= crypto.createHmac('sha1',salt);
-        return hmac.update(password).digest('hex');
-    }
 };
