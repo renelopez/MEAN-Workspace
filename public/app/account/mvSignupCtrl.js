@@ -4,7 +4,7 @@
     angular.module("app")
             .controller("mvSignupCtrl",mvSignupCtrl);
 
-    mvSignupCtrl.$inject=['$location','mvAuth','mvNotifier']
+    mvSignupCtrl.$inject=['$location','mvAuth','mvNotifier'];
 
     function mvSignupCtrl($location,mvAuthService,mvNotifier) {
         var vm = this;
@@ -24,7 +24,7 @@
                 mvNotifier.notify('User '+ newUserData.username+' was created succesfully');
                 $location.path('/')
             },function(reason){
-                mvNotifier.error('There were some errors while creating the user.' + reason.data);
+                mvNotifier.error('There were some errors while creating the user.' + reason);
                 $location.path('/')
             });
         }
