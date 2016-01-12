@@ -1,6 +1,16 @@
 angular.module('app',['ngResource','ngRoute']);
 
 angular.module('app').config(function ($routeProvider, $locationProvider) {
+    var routeRoleChecks={
+        admin:{auth:function(mvAuth){
+            return mvAuth.authorizeCurrentUserForRoute('admin');
+        }},
+        user:{auth:function(mvAuth){
+            return mvAuth.authorizeAuthenticatedUserForRoute();
+        }}
+    };
+
+
     $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
@@ -8,19 +18,12 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/',{templateUrl:'/partials/main/main',controller:'mvMainCtrl as vm'})
         .when('/admin/users',{templateUrl:'/partials/admin/user-list',
-            controller:'mvUserListCtrl as vm',
-            resolve:{
-                auth:function($q,mvIdentity){
-                    if(mvIdentity.currentUser && mvIdentity.currentUser.roles.indexOf('admin') > -1){
-                        return true;
-                    }
-                    else{
-                        return $q.reject('not authorized')
-                    }
-                }
-            }})
+            controller:'mvUserListCtrl as vm',resolve:routeRoleChecks.admin
+            })
         .when('/signup',{templateUrl:'/partials/account/signup',
         controller:"mvSignupCtrl as vm"})
+        .when('/profile',{templateUrl:'/partials',
+            controller:'mvProfileCtrl as vm',resolve:routeRoleChecks.user})
 });
 
 angular.module('app').run(function($rootScope,$location){
