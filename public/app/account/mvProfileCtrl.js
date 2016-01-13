@@ -4,12 +4,15 @@
     angular.module('app').
         controller('mvProfileCtrl',mvProfileCtrl);
 
-    mvProfileCtrl.$inject=['mvAuth','mvNotifier'];
+    mvProfileCtrl.$inject=['mvAuth','mvIdentity','mvNotifier'];
 
-    function mvProfileCtrl(mvAuth,mvNotifier){
-        vm.username=mvAuth.currentUser.username;
-        vm.firstName=mvAuth.currentUser.firstName;
-        vm.lastName=mvAuth.currentUser.lastName;
+    function mvProfileCtrl(mvAuth,mvIdentity,mvNotifier){
+        var vm=this;
+
+        vm.username=mvIdentity.currentUser.username;
+        vm.firstName=mvIdentity.currentUser.firstName;
+        vm.lastName=mvIdentity.currentUser.lastName;
+        vm.password=mvIdentity.currentUser.password
         vm.update=update;
 
 

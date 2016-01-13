@@ -22,7 +22,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
             })
         .when('/signup',{templateUrl:'/partials/account/signup',
         controller:"mvSignupCtrl as vm"})
-        .when('/profile',{templateUrl:'/partials',
+        .when('/profile',{templateUrl:'/partials/account/profile',
             controller:'mvProfileCtrl as vm',resolve:routeRoleChecks.user})
 });
 
