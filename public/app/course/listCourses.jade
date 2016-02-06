@@ -1,0 +1,16 @@
+.container
+   form.form-inline.pull-right
+      .form-group
+            input.spacing.form-control(type='text' ng-model='vm.filteredTitle' placeholder="Put a title to filter")
+      .form-group
+            select.spacing.form-control(ng-model='vm.selectedOption' ng-options='item.value as item.text for item in vm.options')
+   table.table.table-striped
+      thead
+         th Title
+         th Featured
+         th Published Date
+      tbody
+         tr(ng-repeat="course in vm.courses | filter:vm.filteredTitle | orderBy:vm.selectedOption")
+            td {{course.title}}
+            td {{course.featured}}
+            td {{course.published | date:'MMM d yyyy'}}

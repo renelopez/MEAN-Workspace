@@ -24,6 +24,8 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
         controller:"mvSignupCtrl as vm"})
         .when('/profile',{templateUrl:'/partials/account/profile',
             controller:'mvProfileCtrl as vm',resolve:routeRoleChecks.user})
+        .when('/courses',{templateUrl:'/partials/course/listCourses',
+            controller:'mvListCoursesCtrl as vm'})
 });
 
 angular.module('app').run(function($rootScope,$location){

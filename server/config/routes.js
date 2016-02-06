@@ -1,6 +1,7 @@
 var auth = require('./auth'),
     mongoose=require('mongoose'),
     users=require('../controllers/users'),
+    courses=require('../controllers/courses'),
     User=mongoose.model('User');
 
 module.exports = function (app) {
@@ -20,6 +21,13 @@ module.exports = function (app) {
     app.post('/logout',function(req,res){
         req.logout();
         res.end()
+    });
+
+    app.get('/api/courses',courses.getAllCourses);
+
+    app.all('/api/*',function(req,res){
+        res.sendStatus(404);
+        res.end();
     });
 
     app.get('*', function (req, res) {
